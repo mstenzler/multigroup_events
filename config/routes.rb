@@ -1,4 +1,4 @@
-SampleApp::Application.routes.draw do
+CraftedCrowd::Application.routes.draw do
 
   resources :password_resets
   resources :users do
