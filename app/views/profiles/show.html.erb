@@ -1,0 +1,63 @@
+<% provide(:title, "Profile: #{@user.name}") %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <%= render 'shared/avatar', user: @user, size: :large, html_class: 'user-profile-avatar' %>
+    <% if @show_edit_links %>
+      <br/>
+      <%= link_to "Edit Avitar", edit_change_avatar_path(@user) %>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <strong>Name:</strong> <%= show_answer(@user.name) %><br/>
+    <strong>Gender:</strong> <%= show_answer(@user.gender) %><br/>
+    <strong>Age:</strong> <%= show_answer(@user.display_age) %><br/>
+    <strong>Location:</strong> <%= show_answer(@user.display_location) %><br/>
+    <% if @show_edit_links %>
+      <%= link_to "Edit User", edit_user_path(@user) %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<% if @show_edit_links %>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-1">
+      <%= link_to "Edit profile", edit_profile_path(@user) %>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <strong>Introduction:</strong><br/>
+    <p>
+      <%= show_answer(@user.profile.short_description) %>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+    <strong>About:</strong><br/>
+    <p>
+      <%= show_answer(@user.profile.long_description) %>
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-1">
+
+    <% if @user.personal_enabled? %>
+      <%= render 'personal', user: @user %>
+    <% elsif @show_edit_links %>
+      <hr/>
+      Your Personals profile is not enabled. Click the button to enable it
+
+      <%= button_to "Enable Personal Profile", 
+      enable_personal_profile_on_path(@user.profile), 
+      :class => "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</div>

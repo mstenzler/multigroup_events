@@ -236,3 +236,27 @@ input {
 #user-avatar-gravatar-field {
   display: none;
 }
+
+/* personal profile */
+
+.display-heading {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.display-group-heading {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.edit-profile-link {
+  font-size: .75em;
+  font-weight: normal;
+}
+
+div.answer-display-block {
+  border-top: 1px solid $gray-lighter;
+  padding-bottom: 1em;
+  padding-top:    1em;
+}
+

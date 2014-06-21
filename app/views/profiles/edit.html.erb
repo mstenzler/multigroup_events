@@ -1,0 +1,17 @@
+<% provide(:title, 'Edit Profile') %>
+<h1>Update your profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+	  <%= bootstrap_form_for(@profile) do |f| %>
+	    <%= render 'shared/error_messages', target: @profile %>
+
+		  <%= f.text_field :short_description %>
+		  <%= f.text_area :long_description %>
+
+	    <%= f.submit "Save changes", class: "btn btn-lg btn-primary" %>
+	  <% end %>
+
+  </div>
+</div>

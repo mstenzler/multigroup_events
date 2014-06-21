@@ -52,11 +52,11 @@
 		                    :class => "small"
 		                    }
 		      %>
+		      <%= f.collection_select( :age_display_type, User::AGE_DISPLAY_TYPES, :to_s, :to_s, {}, { :class => "auto-width" }) %>
   		  <% end %>
 
  			  <% if use_time_zone?(@user) %>
 				  <div class="form-group">
-				    <%= f.label :time_zone %>
 			      <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones, {}, { class: "form-control auto-width", id: "time-zone-select" } )%>
 			    </div>
 			  <% end %>

@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  DEFAULT_NO_ANSWER = "No answer yet"
+
 	#returns the full title on a per-page basis
 	def full_title(page_title)
 		base_title = CONFIG[:title] || "Ruby on Rails Template"
@@ -31,4 +33,20 @@ module ApplicationHelper
     end
   end
 
+  def display_no_answer(msg=DEFAULT_NO_ANSWER)
+    content_tag(:span, msg, class: "no-answer")
+  end
+
+  def show_answer(answer)
+    answer.blank? ? display_no_answer : answer
+  end
+
+  def edit_object_link(obj, name=nil)
+    name ||= obj.class.name.humanize
+    label = "Edit"
+    if obj.new_record?
+      label = "Create"
+    end
+    link_to "#{label} #{name}", edit_polymorphic_path(obj)
+  end
 end

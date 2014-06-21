@@ -1,0 +1,18 @@
+1|100|gender|Gender
+2|200|ethnicity|Ethnicity
+3|300|currently_living|Currently Living
+4|400|drink|Drink
+5|500|employment_status|Employment Status
+6|600|education_level|Education Level
+7|700|have_kids|Have Kids
+8|800|want_more_kids|Want More Kids
+9|900|body_type|Body Type
+10|1000|eye_color|Eye Color
+11|1100|hair_color|Hair Color
+12|1200|marital_status|Maritial Status
+13|1300|profession|Profession
+14|1400|income_level|Income Level
+15|1500|smoke|Smoke
+16|1600|religion|Religion 
+17|1700|political_views|Policical Views
+18|1800|languages|Languages

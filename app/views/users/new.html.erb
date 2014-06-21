@@ -32,11 +32,15 @@
 		                    }
 		       %>
 
+			    <%= f.collection_select( :age_display_type, User::AGE_DISPLAY_TYPES, :to_s, :to_s, {}, { :class => "auto-width" }) %>
 		  <% end %>
+
+      <%= f.collection_select :geo_country_id, @countries, :id, :country_name, {:prompt => "-- Select a country --"}, { :class => 'auto-width' }  -%>
+
+      <%= f.text_field :zip_code, {:class=>"auto-width", :size=>"10"} %>
 
 		 <% if use_time_zone?(@user) %>
 			  <div class="form-group">
-			    <%= f.label :time_zone %>
 		      <%= f.time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones, {}, { class: "form-control auto-width", id: "time-zone-select" } )%>
 		    </div>
 		  <% end %>

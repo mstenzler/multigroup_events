@@ -1,0 +1,213 @@
+---
+personal_questions:
+  - label: gender
+    question: gender
+    answers:
+      - Male
+      - Female
+      - Transgender
+      - Other
+  - label: ethnicity
+    question: Ethnicity 
+    answers:
+      - African American (black)
+      - American Indian
+      - Caucasian (white)
+      - Chinese
+      - East Indian
+      - Filipino
+      - Hispanic/Latino
+      - Japanese
+      - Korean
+      - Middle Eastern
+      - Native American
+      - Native Hawaiian
+      - Pacific Islander
+      - Samoan
+      - Thai
+      - Vietnamese
+      - Other Asian
+      - Other
+  - label: currently_living
+    question: Currently Living
+    answers:
+      - Alone
+      - With kids
+      - With parents
+      - With pets
+      - With roommate(s)
+  - label: drink
+    question: Drink
+    answers:
+      - 'No'
+      - 'Socially'
+      - 'Daily'
+      - 'A few times a week'
+      - 'A few times a Month'
+  - label: employment_status
+    question: Employment Status
+    answers:
+      - Full-time
+      - Part-time
+      - Homemaker
+      - Retired
+      - Self-employed
+      - Student
+      - Unemployed
+      - Work at home
+  - label: education_level
+    question: Education Level
+    answers:
+      - Some High SChool
+      - High School Graduate
+      - Some Collage
+      - Collage Graduate
+      - Technical/Trade School
+      - Post-Graduate
+  - label: have_kids
+    question: Have Kids
+    answers:
+      - 'No'
+      - 'Yes: at home full-time'
+      - 'Yes: at home part-time'
+      - 'Yes: not at home'
+  - label: want_more_kids
+    question: Want More Kids
+    answers:
+      - 'No'
+      - 'Yes'
+      - 'Maybe'
+  - label: body_type
+    question: Body Type
+    answers:
+      - Slim
+      - Average
+      - Athletic
+      - Fit
+      - Thick
+      - A few extra pounds
+      - Large
+      - Voluptuous
+  - label: eye_color
+    question: Eye Color
+    answers:
+      - Black
+      - Blue
+      - Brown
+      - Gray
+      - Green
+      - Hazel
+      - Blodshot
+      - Auburn
+  - label: hair_color
+    question: Hair Color
+    answers:
+      - Auburn
+      - Black
+      - Blonde
+      - Dirty Blond
+      - Light Brown
+      - Dark Brown
+      - Red
+      - White/gray
+      - Bald
+      - A little gray
+  - label: marital_status
+    question: Marital Status
+    answers:
+      - Single
+      - Divorced
+      - Widowed
+      - Seperated
+      - It's Complicated
+  - label: profession
+    question: Profession
+    answers:
+      - Artistic / Musical / Writer
+      - Banking / Financial Services
+      - Real Estate
+      - Clerical / Administrative
+      - Computer related / Hardware
+      - Computer related / Software
+      - Computer related / Design
+      - Construction / Craftsman
+      - Construction / Craftsman
+      - Education / Academic Research
+      - Entertainment / Media
+      - Executive / Management
+      - Hospitality / Travel
+      - Legal Services
+      - Manufacturing / Distributions
+      - Medical / Health Services
+      - Politics / Government / Military
+      - Sales / Marketing
+      - Technical / Science / Engineering
+      - Transportation
+      - Food Service
+      - Other
+  - label: income_level
+    question: Income Level
+    answers:
+      - 'Less than $25,000'
+      - '$35,000'
+      - '$50,000'
+      - '$75,000'
+      - '$100,000'
+      - '$150.000'
+      - 'More than $200,000'
+  - label: smoke
+    question: Smoke
+    answers:
+      - 'No'
+      - 'Socially'
+      - 'Daily'
+  - label: religion
+    question: Religion
+    answers:
+      - Buddhist
+      - Taoist
+      - Christian
+      - Christian / Protestant
+      - Christian / Catholic
+      - Christian / LDS
+      - Christian / Other
+      - Hindu
+      - Jewish
+      - Jewish Orthidox
+      - Islam
+      - None/Agnostic
+      - Atheist
+      - Not Religious
+      - Satinist
+      - Spiritual but not religious
+      - Scientology
+      - Pagen
+      - Wiccan
+      - Other
+  - label: political_views
+    question: Political Views
+    answers:
+      - Very conservative
+      - Conservative
+      - Middle of the road
+      - Liberal
+      - Very liberal
+      - Not political
+  - label: languages
+    question: Languages
+    answers:
+      - English
+      - French
+      - German
+      - Italian
+      - Spanish
+      - Portuguese
+      - Dutch
+      - Chinese
+      - Japanese
+      - Arabic
+      - Russian
+      - Hebrew
+      - Hindi
+      - Tagalog
+      - Urdu

@@ -6,6 +6,17 @@ GIT
     validates_timeliness (3.0.14)
       timeliness (~> 0.3.7)
 
+PATH
+  remote: /home/mike/workspace/rails_apps/geokit
+  specs:
+    geokit (1.8.5)
+      multi_json (>= 1.3.2)
+
+PATH
+  remote: /home/mike/workspace/rails_apps/rails-bootstrap-forms
+  specs:
+    bootstrap_form (2.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -42,7 +53,6 @@ GEM
       sass (~> 3.2)
     bootstrap-will_paginate (0.0.10)
       will_paginate
-    bootstrap_form (2.1.1)
     builder (3.1.4)
     cancan (1.6.10)
     capybara (2.2.1)
@@ -82,8 +92,6 @@ GEM
     ffi (1.9.3)
     formatador (0.2.4)
     geocoder (1.1.9)
-    geokit (1.8.4)
-      multi_json (>= 1.3.2)
     guard (2.3.0)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -237,7 +245,7 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (~> 3.0.3.0)
   bootstrap-will_paginate
-  bootstrap_form (~> 2.1.1)
+  bootstrap_form!
   cancan
   capybara (>= 2.1.0)
   carrierwave
@@ -247,7 +255,7 @@ DEPENDENCIES
   factory_girl_rails (>= 4.2.0)
   faker
   geocoder
-  geokit
+  geokit!
   guard-rspec (>= 2.5.0)
   guard-spork (>= 1.5.0)
   jbuilder (~> 1.2)

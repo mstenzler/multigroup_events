@@ -1,0 +1,12 @@
+Personal stuff!
+Looking for: <%= user.personal_profile.about %>
+
+<hr/>
+
+<% if @show_edit_links %>
+  <%= link_to "Edit", edit_personal_profile_path %>
+<% end %>
+
+<p>
+<%= link_to "Personal Details", show_personal_path(user) %>
+</p>

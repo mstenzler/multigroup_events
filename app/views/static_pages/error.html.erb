@@ -1,0 +1,8 @@
+<% provide(:title, 'ERROR') %>
+
+<h1>A problem has occured!</h1>
+<% if Rails.env.development? || Rails.env.test? %>
+	<p>
+	 <%= @error_message %>
+	</p>
+<% end %>

@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
 
+  DEFAULT_ERROR_MESSAGE = "A Error has occured"
+
   #For each of the user_form_options define require_#{option_name} and
   #enable_#{option_name} methods and make each one a helper method as well
   CONFIG[:user_form_options].each do |option_name|
@@ -45,6 +47,16 @@ class ApplicationController < ActionController::Base
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     size = options[:size] || User::GRAVATAR_SIZE_MAP[:small]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+  end
+
+  def display_error(err=nil)
+    message = nil
+    unless err.nil?
+      message = err.is_a?(String) ? err : (err.try(:message) ? err.message : nil)
+    end
+    flash[:notice] = (!message.nil? && 
+      (Rails.env.development? || Rails.env.test?)) ? message : DEFAULT_ERROR_MESSAGE
+    redirect_to error_url
   end
 
   private

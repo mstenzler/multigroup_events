@@ -1,0 +1,212 @@
+1	United States	US	US	1	1	1	\N	1
+2	Canada	Canada	CA	1	1	1	\N	1
+3	Bahamas	Bahamas	BS	1	242	0	\N	1000
+4	Barbados	Barbados	BB	1	246	0	\N	1000
+5	Belize	Belize	BZ	1	501	0	\N	1000
+6	Bermuda	Bermuda	BM	1	441	0	\N	1000
+7	British Virgin Islands	BVI	VG	1	284	0	\N	1000
+8	Cayman Islands	CaymanIsl	KY	1	345	0	\N	1000
+9	Costa Rica	CostaRica	CR	1	506	0	\N	1000
+10	Cuba	Cuba	CU	1	53	0	\N	1000
+11	Dominica	Dominica	DM	1	767	0	\N	1000
+12	Dominican Republic	DominicanRep	DO	1	809	0	\N	1000
+13	El Salvador	ElSalvador	SV	1	503	0	\N	1000
+14	Greenland	Greenland	GL	1	299	0	\N	1000
+15	Grenada	Grenada	GD	1	473	0	\N	1000
+16	Guadeloupe	Guadeloupe	GP	1	590	0	\N	1000
+17	Guatemala	Guatemala	GT	1	502	0	\N	1000
+18	Haiti	Haiti	HT	1	509	0	\N	1000
+19	Honduras	Honduras	HN	1	503	0	\N	1000
+20	Jamaica	Jamaica	JM	1	876	0	\N	1000
+21	Martinique	Martinique	MQ	1	596	0	\N	1000
+22	Mexico	Mexico	MX	1	52	0	\N	1000
+23	Montserrat	Montserrat	MS	1	664	0	\N	1000
+24	Nicaragua	Nicaragua	NI	1	505	0	\N	1000
+25	Panama	Panama	PA	1	507	0	\N	1000
+26	Puerto Rico	PuertoRico	PR	1	787	0	\N	1000
+27	Trinidad and Tobago	Trinidad-Tobago	TT	1	868	0	\N	1000
+28	United States Virgin Islands	USVI	VI	1	340	0	\N	1000
+29	Argentina	Argentina	AR	2	54	0	\N	1000
+30	Bolivia	Bolivia	BO	2	591	0	\N	1000
+31	Brazil	Brazil	BR	2	55	0	\N	1000
+32	Chile	Chile	CL	2	56	0	\N	1000
+33	Colombia	Colombia	CO	2	57	0	\N	1000
+34	Ecuador	Ecuador	EC	2	593	0	\N	1000
+35	Falkland Islands	FalklandIsl	FK	2	500	0	\N	1000
+36	French Guiana	FrenchGuiana	GF	2	594	0	\N	1000
+37	Guyana	Guyana	GY	2	592	0	\N	1000
+38	Paraguay	Paraguay	PY	2	595	0	\N	1000
+39	Peru	Peru	PE	2	51	0	\N	1000
+40	Suriname	Suriname	SR	2	597	0	\N	1000
+41	Uruguay	Uruguay	UY	2	598	0	\N	1000
+42	Venezuela	Venezuela	VE	2	58	0	\N	1000
+43	Albania	Albania	AL	3	355	0	\N	1000
+44	Andorra	Andorra	AD	3	376	0	\N	1000
+45	Armenia	Armenia	AM	3	374	0	\N	1000
+46	Austria	Austria	AT	3	43	0	\N	1000
+47	Azerbaijan	Azerbaijan	AZ	3	994	0	\N	1000
+48	Belarus	Belarus	BY	3	375	0	\N	1000
+49	Belgium	Belgium	BE	3	32	0	\N	1000
+50	Bosnia and Herzegovina	Bosnia-Herzegovina	BA	3	387	0	\N	1000
+51	Bulgaria	Bulgaria	BG	3	359	0	\N	1000
+52	Croatia	Croatia	HR	3	385	0	\N	1000
+53	Cyprus	Cyprus	CY	3	357	0	\N	1000
+54	Czech Republic	CzechRep	CZ	3	420	0	\N	1000
+55	Denmark	Denmark	DK	3	45	0	\N	1000
+56	Estonia	Estonia	EE	3	372	0	\N	1000
+57	Finland	Finland	FI	3	358	0	\N	1000
+58	France	France	FR	3	33	0	\N	1000
+59	Georgia	Georgia	GE	3	995	0	\N	1000
+60	Germany	Germany	DE	3	49	0	\N	1000
+61	Gibraltar	Gibraltar	GI	3	350	0	\N	1000
+62	Greece	Greece	GR	3	30	0	\N	1000
+63	Guernsey	Guernsey	GG	3	44	0	\N	1000
+64	Hungary	Hungary	HU	3	36	0	\N	1000
+65	Iceland	Iceland	IS	3	354	0	\N	1000
+66	Ireland	Ireland	IE	3	353	0	\N	1000
+67	Isle of Man	IsleofMan	IM	3	44	0	\N	1000
+68	Italy	Italy	IT	3	39	0	\N	1000
+69	Jersey	Jersey	JE	3	44	0	\N	1000
+70	Kosovo	Kosovo	XK	3	381	0	\N	1000
+71	Latvia	Latvia	LV	3	371	0	\N	1000
+72	Liechtenstein	Liechtenstein	LI	3	423	0	\N	1000
+73	Lithuania	Lithuania	LT	3	370	0	\N	1000
+74	Luxembourg	Luxembourg	LU	3	352	0	\N	1000
+75	Macedonia	Macedonia	MK	3	389	0	\N	1000
+76	Malta	Malta	MT	3	356	0	\N	1000
+77	Moldova	Moldova	MD	3	373	0	\N	1000
+78	Monaco	Monaco	MC	3	377	0	\N	1000
+79	Montenegro	Montenegro	ME	3	381	0	\N	1000
+80	Netherlands	Netherlands	NL	3	31	0	\N	1000
+81	Norway	Norway	NO	3	47	0	\N	1000
+82	Poland	Poland	PL	3	48	0	\N	1000
+83	Portugal	Portugal	PT	3	351	0	\N	1000
+84	Romania	Romania	RO	3	40	0	\N	1000
+85	Russia	Russia	RU	3	7	0	\N	1000
+86	San Marino	SanMarino	SM	3	378	0	\N	1000
+87	Serbia	Serbia	RS	3	381	0	\N	1000
+88	Slovakia	Slovakia	SK	3	421	0	\N	1000
+89	Slovenia	Slovenia	SI	3	386	0	\N	1000
+90	Spain	Spain	ES	3	34	0	\N	1000
+91	Sweden	Sweden	SE	3	46	0	\N	1000
+92	Switzerland	Switzerland	CH	3	41	0	\N	1000
+93	Turkey	Turkey	TR	3	90	0	\N	1000
+94	Ukraine	Ukraine	UA	3	380	0	\N	1000
+95	United Kingdom	UK	GB	3	44	1	\N	1
+96	Vatican City	Vatican	VA	3	39	0	\N	1000
+97	Afghanistan	Afghanistan	AF	4	93	0	\N	1000
+98	Bahrain	Bahrain	BH	4	973	0	\N	1000
+99	Bangladesh	Bangladesh	BD	4	880	0	\N	1000
+100	Bhutan	Bhutan	BT	4	975	0	\N	1000
+101	Brunei	Brunei	BN	4	673	0	\N	1000
+102	Cambodia	Cambodia	KH	4	855	0	\N	1000
+103	China	China	CN	4	86	0	\N	1000
+104	Timor-Leste	Timor-Leste	TL	4	670	0	\N	1000
+105	Hong Kong	HongKong	HK	4	852	0	\N	1000
+106	India	India	IN	4	91	0	\N	1000
+107	Indonesia	Indonesia	ID	4	62	0	\N	1000
+108	Iran	Iran	IR	4	98	0	\N	1000
+109	Iraq	Iraq	IQ	4	964	0	\N	1000
+110	Israel	Israel	IL	4	972	0	\N	1000
+111	Japan	Japan	JP	4	81	0	\N	1000
+112	Jordan	Jordan	JO	4	962	0	\N	1000
+113	Kazakhstan	Kazakhstan	KZ	4	7	0	\N	1000
+114	Kuwait	Kuwait	KW	4	965	0	\N	1000
+115	Kyrgyzstan	Kyrgyzstan	KG	4	996	0	\N	1000
+116	Laos	Laos	LA	4	856	0	\N	1000
+117	Lebanon	Lebanon	LB	4	961	0	\N	1000
+118	Macau	Macau	MO	4	853	0	\N	1000
+119	Malaysia	Malaysia	MY	4	60	0	\N	1000
+120	Maldives	Maldives	MV	4	960	0	\N	1000
+121	Mongolia	Mongolia	MN	4	976	0	\N	1000
+122	Myanmar (Burma)	Myanmar(Burma)	MM	4	95	0	\N	1000
+123	Nepal	Nepal	NP	4	977	0	\N	1000
+124	North Korea	NorthKorea	KP	4	850	0	\N	1000
+125	Oman	Oman	OM	4	968	0	\N	1000
+126	Pakistan	Pakistan	PK	4	92	0	\N	1000
+127	Philippines	Philippines	PH	4	63	0	\N	1000
+128	Qatar	Qatar	QA	4	974	0	\N	1000
+129	Saudi Arabia	SaudiArabia	SA	4	966	0	\N	1000
+130	Singapore	Singapore	SG	4	65	0	\N	1000
+131	South Korea	SouthKorea	KR	4	82	0	\N	1000
+132	Sri Lanka	SriLanka	LK	4	94	0	\N	1000
+133	Syria	Syria	SY	4	963	0	\N	1000
+134	Taiwan	Taiwan	TW	4	886	0	\N	1000
+135	Tajikistan	Tajikistan	TJ	4	992	0	\N	1000
+136	Thailand	Thailand	TH	4	66	0	\N	1000
+137	Turkmenistan	Turkmenistan	TM	4	993	0	\N	1000
+138	United Arab Emirates	UAE	AE	4	971	0	\N	1000
+139	Uzbekistan	Uzbekistan	UZ	4	998	0	\N	1000
+140	Vietnam	Vietnam	VN	4	84	0	\N	1000
+141	Yemen	Yemen	YE	4	967	0	\N	1000
+142	Algeria	Algeria	DZ	5	213	0	\N	1000
+143	Angola	Angola	AO	5	244	0	\N	1000
+144	Benin	Benin	BJ	5	229	0	\N	1000
+145	Botswana	Botswana	BW	5	267	0	\N	1000
+146	Burkina Faso	BurkinaFaso	BF	5	226	0	\N	1000
+147	Burundi	Burundi	BI	5	257	0	\N	1000
+148	Cameroon	Cameroon	CM	5	237	0	\N	1000
+149	Cape Verde	CapeVerde	CV	5	238	0	\N	1000
+150	Central African Republic	CentralAfricanRep	CF	5	236	0	\N	1000
+151	Chad	Chad	TD	5	235	0	\N	1000
+152	Congo-Brazzaville	Congo-Brazzaville	CG	5	242	0	\N	1000
+153	Congo-Kinshasa	Congo-Kinshasa	CD	5	242	0	\N	1000
+154	Djibouti	Djibouti	DJ	5	253	0	\N	1000
+155	Egypt	Egypt	EG	5	20	0	\N	1000
+156	Equatorial Guinea	EquatorialGuinea	GQ	5	240	0	\N	1000
+157	Eritrea	Eritrea	ER	5	291	0	\N	1000
+158	Ethiopia	Ethiopia	ET	5	251	0	\N	1000
+159	Gabon	Gabon	GA	5	241	0	\N	1000
+160	Gambia	Gambia	GM	5	220	0	\N	1000
+161	Ghana	Ghana	GH	5	233	0	\N	1000
+162	Guinea	Guinea	GN	5	224	0	\N	1000
+163	Guinea-Bissau	Guinea-Bissau	GW	5	245	0	\N	1000
+164	Ivory Coast	IvoryCoast	CI	5	225	0	\N	1000
+165	Kenya	Kenya	KE	5	254	0	\N	1000
+166	Lesotho	Lesotho	LS	5	266	0	\N	1000
+167	Liberia	Liberia	LR	5	231	0	\N	1000
+168	Libya	Libya	LY	5	218	0	\N	1000
+169	Madagascar	Madagascar	MG	5	261	0	\N	1000
+170	Malawi	Malawi	MW	5	265	0	\N	1000
+171	Mali	Mali	ML	5	223	0	\N	1000
+172	Mauritania	Mauritania	MR	5	222	0	\N	1000
+173	Mauritius	Mauritius	MU	5	230	0	\N	1000
+174	Morocco	Morocco	MA	5	212	0	\N	1000
+175	Mozambique	Mozambique	MZ	5	258	0	\N	1000
+176	Namibia	Namibia	NA	5	264	0	\N	1000
+177	Niger	Niger	NE	5	227	0	\N	1000
+178	Nigeria	Nigeria	NG	5	234	0	\N	1000
+179	Reunion	Reunion	RE	5	262	0	\N	1000
+180	Rwanda	Rwanda	RW	5	250	0	\N	1000
+181	Sao Tome and Principe	SaoTome-Principe	ST	5	239	0	\N	1000
+182	Senegal	Senegal	SN	5	221	0	\N	1000
+183	Seychelles	Seychelles	SC	5	248	0	\N	1000
+184	Sierra Leone	SierraLeone	SL	5	232	0	\N	1000
+185	Somalia	Somalia	SO	5	252	0	\N	1000
+186	South Africa	SouthAfrica	ZA	5	27	0	\N	1000
+187	Sudan	Sudan	SD	5	249	0	\N	1000
+188	Swaziland	Swaziland	SZ	5	268	0	\N	1000
+189	Tanzania	Tanzania	TZ	5	255	0	\N	1000
+190	Togo	Togo	TG	5	228	0	\N	1000
+191	Tunisia	Tunisia	TN	5	216	0	\N	1000
+192	Uganda	Uganda	UG	5	256	0	\N	1000
+193	Western Sahara	WesternSahara	EH	5	212	0	\N	1000
+194	Zambia	Zambia	ZM	5	260	0	\N	1000
+195	Zimbabwe	Zimbabwe	ZW	5	263	0	\N	1000
+196	Australia	Australia	AU	6	61	0	\N	1000
+197	New Zealand	NewZealand	NZ	6	64	0	\N	1000
+198	Fiji	Fiji	FJ	6	679	0	\N	1000
+199	French Polynesia	FrenchPolynesia	PF	6	689	0	\N	1000
+200	Guam	Guam	GU	6	671	0	\N	1000
+201	Kiribati	Kiribati	KI	6	686	0	\N	1000
+202	Marshall Islands	MarshallIsl	MH	6	692	0	\N	1000
+203	Micronesia	Micronesia	FM	6	691	0	\N	1000
+204	Nauru	Nauru	NR	6	674	0	\N	1000
+205	New Caledonia	NewCaledonia	NC	6	687	0	\N	1000
+206	Papua New Guinea	PapuaNewGuinea	PG	6	675	0	\N	1000
+207	Samoa	Samoa	WS	6	684	0	\N	1000
+208	Solomon Islands	SolomonIsl	SB	6	677	0	\N	1000
+209	Tonga	Tonga	TO	6	676	0	\N	1000
+210	Tuvalu	Tuvalu	TV	6	688	0	\N	1000
+211	Vanuatu	Vanuatu	VU	6	678	0	\N	1000
+212	Wallis and Futuna	Wallis-Futuna	WF	6	681	0	\N	1000

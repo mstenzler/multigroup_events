@@ -1,0 +1,26 @@
+<% provide(:title, 'Update Personal Profile') %>
+<h1>Update Personal Profile</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% @personal_profile.personal_question_answers.load %>
+    <%= bootstrap_form_for(@personal_profile) do |f| %>
+      <%= render 'shared/error_messages', target: @personal_profile %>
+      <%= hidden_field_tag 'source', 'edit' %>
+      <%= f.text_area :about %>
+      <%= f.select( :height_inches, PersonalProfile.height_inches_select_options, {:include_blank => true }, { :class => "auto-width" }) %>&nbsp;&nbsp;
+      &nbsp;&nbsp;OR&nbsp;&nbsp;
+      <%= f.select( :height_centemeters, 120..240, {:include_blank => true }, { :class => "auto-width" }) %><b>centemeters</b>
+
+      <%= f.collection_check_boxes :personal_question_answer_ids, PersonalQuestionAnswer.by_label(:ethnicity), :id, :answer, label:  PersonalQuestion::LABEL_TO_QUESTION["ethnicity"], :class => "auto-width", checked: @personal_question_answers_hash["ethnicity"] %>
+
+      <% for label in PersonalQuestion::LABELS - ['ethnicity', 'languages'] %>
+        <%= f.collection_select :personal_question_answer_ids, PersonalQuestionAnswer.by_label(label), :id, :answer, { label:  PersonalQuestion::LABEL_TO_QUESTION[label], :include_blank => true }, { :class => "auto-width", name: 'personal_profile[personal_question_answer_ids][]', multiple: false } %>
+      <% end %>
+
+      <%= f.collection_check_boxes :personal_question_answer_ids, PersonalQuestionAnswer.by_label(:languages), :id, :answer, label:  PersonalQuestion::LABEL_TO_QUESTION["languages"], checked: @personal_question_answers_hash["languages"]  %>
+
+      <%= f.submit "Update", class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
+</div>

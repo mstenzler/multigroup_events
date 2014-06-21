@@ -1,11 +1,21 @@
 class User < ActiveRecord::Base
+  belongs_to :geo_country
+  belongs_to :geo_area
+  has_one :profile
+  has_one :personal_profile, -> { includes :personal_question_responses,
+                                           :personal_question_wants  }
+
 	before_save { email.downcase! }
 	before_create :create_remember_token
   before_save :init_new_user
+  before_save :update_age
+  after_save :init_profile
 
   mount_uploader :avatar, AvatarUploader
   
-  attr_accessor :verify_token 
+  attr_accessor :verify_token, :unhashed_email_validation_token, :zip_code
+
+  VALIDATION_CODE_RESET_MESSAGE = "Your email validation code has been reset and emailed to you."
 
   PASSWORD_RESET_TTL_HOURS = CONFIG[:password_reset_ttl_hours] || 2
 
@@ -21,6 +31,24 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_NAME_REGEX = /\A[a-z\d\-\_\s]+\z/i
   VALID_USERNAME_REGEX = /\A[a-z]{1}[a-z\d\-\_]+\z/i
+  
+  AGE_DISPLAY_TYPES = ["Hidden", "Number", "Range"]
+
+  AGE_DISPLAY_HIDDEN = AGE_DISPLAY_TYPES[0]
+  AGE_DISPLAY_NUMBER = AGE_DISPLAY_TYPES[1]
+  AGE_DISPLAY_RANGE = AGE_DISPLAY_TYPES[2]
+
+  AGE_RANGE_MAP = [ 
+    { min: 0, max: 17, text: "Under 18 years old"},
+    { min: 18, max: 25, text: "18-25 years old"},
+    { min: 26, max: 35, text: "26-35 years old"},
+    { min: 36, max: 45, text: "36-45 years old"},
+    { min: 46, max: 55, text: "36-55 years old"},
+    { min: 56, max: 65, text: "56-65 years old"},
+    { min: 66, max: 75, text: "66-75 years old"},
+    { min: 76, max: 200, text: "76 years or older"}    
+  ]
+
 
   VALID_GENDERS = ["Male", "Female", "Transgender", "Other"]
   MALE_VALUE = VALID_GENDERS[0]
@@ -73,6 +101,8 @@ class User < ActiveRecord::Base
 
  #   req_username = CONFIG[:require_username?] || false
  #   p "DEFINING USERNAME. username_can_be_blank = #{username_can_be_blank}"
+  validates :geo_country, presence: true
+  validates :zip_code, presence: true
   validates :username, allow_blank: username_can_be_blank, presence: !username_can_be_blank, 
             format: { with: VALID_USERNAME_REGEX },
             uniqueness: { case_sensitive: false},
@@ -124,10 +154,60 @@ class User < ActiveRecord::Base
     end
   end
 
+  def User.display_age_range(age, map = AGE_RANGE_MAP)
+    ret = ""
+    logger.debug("map = #{map.inspect}")
+    map.each do |map_item|
+      logger.debug("map_item = #{map_item.inspect}")
+      logger.debug("age = '#{age}', min = '#{map_item[:min]}', max = '#{map_item[:max]}'")
+      if age >= map_item[:min] && age <= map_item[:max] 
+        ret = map_item[:text]
+        break
+      end
+    end
+    ret
+  end
+
+  def display_age_range
+    self.class.display_age_range(age)
+  end
+
+  def display_age
+    ret = ""
+    case self.age_display_type
+    when AGE_DISPLAY_HIDDEN
+      ret = "Private"
+    when AGE_DISPLAY_NUMBER
+      ret = self.age
+    when AGE_DISPLAY_RANGE
+      ret = display_age_range
+    else
+      raise "No valid display age: #{self.age_display_type} in display_age"
+    end
+    ret
+  end
+
+  def display_location
+    self.geo_area.display
+  end
+
+  def to_param
+    self.username
+  end
+
+  def zip_code
+    @zip_code || geo_area.try(:zip_code)
+  end
+
+  def self.find(identifier)
+    self.find_by_username(identifier)
+  end
+
   def init_unvalidated_email
     if CONFIG[:verify_email?]
       token = User.new_token
   #    p "IN INIT. token = #{token}"
+      self.unhashed_email_validation_token = token
       self.email_validation_token = User.hash(token)
       self.email_validated = false
     end
@@ -144,6 +224,7 @@ class User < ActiveRecord::Base
   def reset_email_validation_token(overide_token=nil)
     #helpful for testing
     token = overide_token.nil? ? User.new_token : overide_token
+    self.unhashed_email_validation_token = token
     hashed_token = User.hash(token)
     self.email_validation_token = hashed_token
     self.email_validated = false
@@ -151,7 +232,7 @@ class User < ActiveRecord::Base
   end
 
   def send_email_validation_token
-    unless self.email_validation_token
+    unless self.email_validation_token && self.unhashed_email_validation_token
       raise "email_validation_token is not set when attempting to email the validation code"
     end
     UserMailer.email_validation_token(self).deliver
@@ -217,6 +298,39 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_age(do_save=false)
+    new_age = calculate_age
+    Rails.logger.debug("IN update_age. new_age = #{new_age.inspect}")
+    self.age = new_age
+    self.age_last_checked = Time.zone.now
+    if do_save
+      self.save(:validate => false)
+    end
+    new_age
+  end
+
+  def update_age!
+    update_age(true)
+  end
+
+  def personal_enabled?
+    (self.profile && self.profile.enable_personal) ? true : false
+  end
+
+  def enable_personal_profile
+    self.transaction do
+      self.profile.update_attribute(:enable_personal, true)
+      unless self.personal_profile
+        self.create_personal_profile
+      end
+    end
+    return true
+  end
+
+  def disable_personal_profile
+    self.profile.update_attribute(:enable_personal, false)
+  end
+
   private
 
     def create_remember_token
@@ -229,9 +343,59 @@ class User < ActiveRecord::Base
 
     def init_new_user
       self.avatar_type ||= NO_AVATAR
+      self.age_display_type ||= AGE_DISPLAY_NUMBER
+      proccess_geo_area unless self.geo_area
       if new_record?
         init_unvalidated_email
       end
     end
 
+    def proccess_geo_area
+      unless (self.geo_country_id && self.zip_code)
+        raise "Error. Tring to proccess geo_area without a country_id & zip"
+      end
+      geo_area = GeoArea.get_or_create_geo_area(self.geo_country_id, self.zip_code)
+
+
+      if geo_area
+        self.geo_area_id = geo_area.id
+      else
+        errors.add(:geo_area, "Zip code is not valid")
+      end #area
+    end
+
+    def init_profile
+      if new_record?
+        self.build_profile
+      end
+    end
+
+    def update_age(do_save=false)
+      new_age = calculate_age
+      Rails.logger.debug("IN update_age. new_age = #{new_age.inspect}")
+      self.age = new_age
+      self.age_last_checked = Time.zone.now
+      if do_save
+        self.save(:validate => false)
+      end
+      new_age
+    end
+
+    def update_age!
+      update_age(true)
+    end
+
+    def calculate_age
+      return nil if birthdate.nil?
+      today = Date.today
+      new_age = 0
+      if (today.month > birthdate.month) or
+         (today.month == birthdate.month and today.day >= birthdate.day)
+        # Birthdate has happened already this year.
+        new_age = today.year - birthdate.year
+      else
+        new_age = today.year - birthdate.year - 1
+      end
+      new_age
+    end
 end

@@ -1,0 +1,65 @@
+<% provide(:title, 'Personal Profile') %>
+<h1>Personal Profile for <%= @user.username %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="display-group-heading">
+      Personal Info: <% if @show_edit_links %> - <span class="edit-profile-link"><%= link_to "Edit", edit_personal_profile_path %></span> <% end %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">About Me:</span>
+      <%= (@personal_profile.about.nil? || @personal_profile.blank?) ? display_no_answer() : simple_format(@personal_profile.about) %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Gender:</span> <%= show_answer(@user.gender) %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Height:</span> <%= show_answer(@personal_profile.height_display) %>
+    </div>
+
+    <% if !@question_answers.nil? %>
+      <% for answer in @question_answers %>
+        <div class="answer-display-block">
+          <span class="display-heading"><%= answer['question'] %>:</span> <%= answer['answer'].join(", ") %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <div class="display-group-heading">
+      Looking for <% if @show_edit_links %> - <span class="edit-profile-link"><%= link_to "Edit", edit_wants_personal_profile_path %></span> <% end %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Description:</span>
+      <%= (@personal_profile.looking_for.blank?) ? display_no_answer() : simple_format(@personal_profile.looking_for) %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Gender:</span>
+      <%=  (@personal_profile.wanted_genders.blank?) ? display_no_answer() : @personal_profile.wanted_genders.join(', ') %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Age:</span>
+      <%= show_answer(@personal_profile.wanted_age_range) %>
+    </div>
+
+    <div class="answer-display-block">
+      <span class="display-heading">Height:</span>
+      <%= show_answer(@personal_profile.target_height_text) %>
+    </div>
+
+    <% if @wanted_answers.nil? || @wanted_answers.size <= 0%>
+       <%= display_no_answer() %>
+    <% else %>
+      <% for answer in @wanted_answers %>
+        <div class="answer-display-block">
+          <span class="display-heading"><%= answer['question'] %>: </span><%= answer['answer'].join(', ') %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

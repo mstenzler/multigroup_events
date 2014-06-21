@@ -1,0 +1,16 @@
+<% provide(:title, 'Reset Email Validation') %>
+<h1>Reset Email Validation</h1>
+
+<% if @user.email_validated %>
+  <h2>Email is already validated!</h2>
+<% else %>
+	<div class="row">
+	  <div class="col-md-6 col-md-offset-3">
+			<%= bootstrap_form_tag url: user_reset_verify_emails_path(@user), :method => :post do |f| %>
+ 			  <%= render 'shared/error_messages', target: @user %>
+			  <%= f.password_field :password %>
+			  <%= f.submit "Reset Email Validation code", class: "btn btn-lg btn-primary" %>
+			<% end %>
+		</div>
+	</div>
+<% end %>

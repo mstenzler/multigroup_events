@@ -23,6 +23,8 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  alias_method :logged_in?, :signed_in?
+
   def current_user=(user)
     @current_user = user
   end

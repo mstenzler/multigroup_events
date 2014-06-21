@@ -9,5 +9,7 @@
       <%= f.text_field :verify_token %>
       <%= f.submit "Verify", class: "btn btn-lg btn-primary" %>
     <% end %>
+
+    <p>Don't have your code? <%= link_to "Reset your verify code!", new_user_reset_verify_email_path(@user) %></p>
   </div>
 </div>

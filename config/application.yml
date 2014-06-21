@@ -1,5 +1,5 @@
-title: Rails 4 App Template
-display_name: Rails Template
+title: Crafted Crowd
+display_name: Crafted Crowd
 min_age: 18
 max_age: 140
 user_form_options: ['name?', 'username?', 'gender?', 'birthdate?', 'time_zone?']
@@ -23,6 +23,7 @@ large_avatar_size: [200, 200]
 medium_avatar_size: [100, 100]
 small_avatar_size: [60, 60]
 tiny__avatar_size: [30, 30]
+default_country: US
 development:
   host: "localhost:3000"
 test:

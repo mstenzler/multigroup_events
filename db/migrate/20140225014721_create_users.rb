@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :gender, :limit => 20
       t.date   :birthdate
       t.string :avatar
+      t.string :avatar_type
       t.string :time_zone
       t.string :password_digest
       t.string :remember_token
@@ -23,6 +24,15 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :email_changed_at
       t.boolean  :admin,           default: false
       t.datetime :last_login_at
+      t.boolean  :is_verified
+      t.boolean  :birthdate_is_verified
+      t.datetime :date_verified
+      t.integer :verified_by_id
+      t.integer  :age
+      t.datetime :age_last_checked
+      t.string   :age_display_type, :limit => 32
+      t.integer  :geo_country_id
+      t.integer  :geo_area_id
 
       t.timestamps
     end

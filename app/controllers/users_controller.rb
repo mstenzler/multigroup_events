@@ -14,6 +14,9 @@ class UsersController < ApplicationController
 
   def new
   	@user = User.new
+#    @countries = GeoCountry.get_country_list({default_country: CONFIG[:default_country],
+#                                              force_reaload: true})
+    load_new_user_info
   end
 
   def create
@@ -21,6 +24,8 @@ class UsersController < ApplicationController
 #    p "IN CREATE: @user.gender = '#{@user.gender}', @user.birthdate = '#{@user.birthdate}'"
     @user.set_create_ip_addresses(request.remote_ip)
     if @user.save
+      profile = @user.build_profile
+      profile.save
     	sign_in @user
       if CONFIG[:verify_email?]
         @user.send_email_validation_token
@@ -31,12 +36,14 @@ class UsersController < ApplicationController
         redirect_to @user
       end
     else
+      load_new_user_info
       render 'new'
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    load_new_user_info
   end
 
   def update
@@ -46,6 +53,7 @@ class UsersController < ApplicationController
       redirect_to @user
       # Handle a successful update.
     else
+      load_new_user_info
       render 'edit'
     end
   end
@@ -87,7 +95,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :username, :email, :password,
-                                   :password_confirmation, :gender, :birthdate, :time_zone)
+                                   :password_confirmation, :gender, :birthdate,
+                                   :geo_country_id, :zip_code,
+                                   :age_display_type, :time_zone)
+    end
+
+    def load_new_user_info
+      @countries = GeoCountry.get_country_list({default_country: CONFIG[:default_country],
+                                              force_reaload: true})
     end
 
     # Before filters

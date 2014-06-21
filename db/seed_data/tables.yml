@@ -1,0 +1,92 @@
+---
+personal_question_answers:
+  enabled: true
+  data_file_type: csv
+  delimiter: \|
+  fields:
+    - id
+    - personal_question_id
+    - answer
+    - rank
+  reset_auto_increment: true
+  terminated_by: "\n"
+  update_time: true
+personal_questions:
+  enabled: true
+  data_file_type: csv
+  delimiter: \|
+  fields:
+    - id
+    - rank
+    - label
+    - question
+  reset_auto_increment: true
+  terminated_by: "\n"
+  update_time: true
+geo_areas:
+  enabled: false
+  data_file_type: csv
+  delimiter: "\t"
+  fields:
+    - geo_country_id
+    - place_name
+    - state
+    - state_code
+    - zip
+    - latitude
+    - longitude
+  reset_auto_increment: true
+  terminated_by: "\n"
+  update_time: true
+geo_countries:
+  enabled: true
+  data_file_type: csv
+  delimiter: "\t"
+  fields:
+    - id
+    - country_name
+    - short_country_name
+    - country_code
+    - geo_continent_id
+    - dial_code
+    - has_geo_regions
+    - rank
+    - rank_level
+  reset_auto_increment: false
+  terminated_by: "\n"
+  update_time: true 
+geo_cities:
+  enabled: true
+  data_file_type: csv
+  delimiter: "\t"
+  fields:
+    - id
+    - city_name
+    - short_city_name
+    - geo_region_id
+    - geo_country_id
+  reset_auto_increment: false
+  terminated_by: "\n"
+  update_time: true
+geo_continents:
+  enabled: true
+  data_file_type: csv
+  delimiter: "\t"
+  fields:
+    - id
+    - continent_name
+  reset_auto_increment: false
+  terminated_by: "\n"
+  update_time: true
+geo_regions:
+  enabled: true
+  data_file_type: csv
+  delimiter: "\t"
+  fields:
+    - id
+    - region_name
+    - short_region_name
+    - geo_country_id
+  reset_auto_increment: false
+  terminated_by: "\n"
+  update_time: true
