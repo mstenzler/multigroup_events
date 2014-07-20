@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 #	validates :name, presence: true, length: { maximum: 50 }
 #	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
-  VALID_NAME_REGEX = /\A[a-z\d\-\_\s]+\z/i
+  VALID_NAME_REGEX = /\A[a-z\d\-\_\.\&\s]+\z/i
   VALID_USERNAME_REGEX = /\A[a-z]{1}[a-z\d\-\_]+\z/i
   
   AGE_DISPLAY_TYPES = ["Hidden", "Number", "Range"]
@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
  #   req_username = CONFIG[:require_username?] || false
  #   p "DEFINING USERNAME. username_can_be_blank = #{username_can_be_blank}"
   validates :geo_country, presence: true
-  validates :zip_code, presence: true
+  validates :zip_code, presence: true, on: :create
   validates :username, allow_blank: username_can_be_blank, presence: !username_can_be_blank, 
             format: { with: VALID_USERNAME_REGEX },
             uniqueness: { case_sensitive: false},
@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
     SecureRandom.urlsafe_base64
   end
 
-  def User.hash(token)
+  def User.make_hash(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
   
@@ -208,7 +208,7 @@ class User < ActiveRecord::Base
       token = User.new_token
   #    p "IN INIT. token = #{token}"
       self.unhashed_email_validation_token = token
-      self.email_validation_token = User.hash(token)
+      self.email_validation_token = User.make_hash(token)
       self.email_validated = false
     end
     self.email_changed_at = Time.zone.now
@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
     #helpful for testing
     token = overide_token.nil? ? User.new_token : overide_token
     self.unhashed_email_validation_token = token
-    hashed_token = User.hash(token)
+    hashed_token = User.make_hash(token)
     self.email_validation_token = hashed_token
     self.email_validated = false
     { token: token, hashed_token: hashed_token}
@@ -255,7 +255,7 @@ class User < ActiveRecord::Base
   
   def generate_token(column, use_hash=false)
     begin
-      token = use_hash ? User.hash(User.new_token) : User.new_token
+      token = use_hash ? User.make_hash(User.new_token) : User.new_token
       self[column] = token
     end while User.exists?(column => self[column])
   end
@@ -264,13 +264,17 @@ class User < ActiveRecord::Base
     size = size.to_sym if (!size.nil? && size.class != Symbol)
     ret = nil
 
+    logger.debug("IN avatar_url. avatar_type = '#{avatar_type}'")
     case avatar_type
     when GRAVATAR_AVATAR
       ret = gravatar_url(self, GRAVATAR_SIZE_MAP[size])
     when UPLOAD_AVATAR 
-      if !avatar.blank?
+      logger.debug("In UPLOAD_AVATAR. avatar = #{avatar}. avatar.blank = #{avatar.blank?}")
+      if !avatar.nil?
+        logger.debug("setting ret to uploaded avatar image")
         ret = avatar.url(size)
       else
+        logger.debug("Using default avatar image")
         ret = default_avatar_url(size)
       end
     else
@@ -298,6 +302,7 @@ class User < ActiveRecord::Base
     end
   end
 
+=begin
   def update_age(do_save=false)
     new_age = calculate_age
     Rails.logger.debug("IN update_age. new_age = #{new_age.inspect}")
@@ -312,6 +317,7 @@ class User < ActiveRecord::Base
   def update_age!
     update_age(true)
   end
+=end
 
   def personal_enabled?
     (self.profile && self.profile.enable_personal) ? true : false
@@ -334,11 +340,11 @@ class User < ActiveRecord::Base
   private
 
     def create_remember_token
-      self.remember_token = User.hash(User.new_token)
+      self.remember_token = User.make_hash(User.new_token)
     end
 
     def create_validation_token
-      self.validation_token = User.hash(User.new_token)
+      self.validation_token = User.make_hash(User.new_token)
     end
 
     def init_new_user
@@ -373,10 +379,12 @@ class User < ActiveRecord::Base
     def update_age(do_save=false)
       new_age = calculate_age
       Rails.logger.debug("IN update_age. new_age = #{new_age.inspect}")
-      self.age = new_age
-      self.age_last_checked = Time.zone.now
+#      self.age = new_age
+#      self.age_last_checked = Time.zone.now
       if do_save
-        self.save(:validate => false)
+        #self.save(:validate => false)
+        self.update_attribute(:age, new_age)
+        self.update_attribute(:age_last_checked, Time.zone.now)
       end
       new_age
     end

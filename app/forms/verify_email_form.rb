@@ -35,7 +35,7 @@ class VerifyEmailForm
 #  	p "In verify_token_is_valid. verify_token = '#{self.verify_token}'."
 #  	p "Hashed token = #{User.hash(self.verify_token)}"
 #  	p "User.email_validation_token = '#{@user.email_validation_token}'"
-  	unless (self.verify_token && (@user.email_validation_token == User.hash(self.verify_token)) )
+  	unless (self.verify_token && (@user.email_validation_token == User.make_hash(self.verify_token)) )
 #  		p "Adding is not valid error to errors"
   		errors.add :verify_token, "is not valid"
   	end

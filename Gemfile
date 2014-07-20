@@ -40,6 +40,7 @@ group :development do
   gem 'populator'
   gem 'faker'
   gem 'rename'
+  gem 'random_data'
 end
 
 group :test do

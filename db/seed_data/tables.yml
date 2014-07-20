@@ -24,7 +24,7 @@ personal_questions:
   terminated_by: "\n"
   update_time: true
 geo_areas:
-  enabled: false
+  enabled: true
   data_file_type: csv
   delimiter: "\t"
   fields:
