@@ -59,14 +59,15 @@ group :test do
   gem 'database_cleaner', '>= 1.2.0'
 end
 
-#gem 'geokit', '~> 1.8.5'
-gem 'geokit', :path => '/home/mike/workspace/rails_apps/geokit'
+gem 'geokit', '~> 1.9.0'
+#gem 'geokit', :path => '/home/mike/workspace/rails_apps/geokit'
 gem 'geocoder'
 gem 'cancan'
 #gem "factory_girl_rails", ">= 4.2.0", :group => [:development, :test]
-gem "bootstrap-sass",  '~> 3.0.3.0'
-#gem 'bootstrap_form', '~> 2.1.1'
-gem 'bootstrap_form', :path => '/home/mike/workspace/rails_apps/rails-bootstrap-forms'
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap_form', '~> 2.2.0'
+gem 'autoprefixer-rails'
+#gem 'bootstrap_form', :path => '/home/mike/workspace/rails_apps/rails-bootstrap-forms'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 #gem 'date_validator'
