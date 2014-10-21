@@ -79,6 +79,12 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 gem 'carrierwave'
 gem 'mini_magick'
 
+gem 'omniauth-meetup'
+#gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+#gem 'twitter'
+gem 'fb_graph'
+
 group :development, :test do
   gem 'rspec-rails', '>= 2.13.1'
   gem "factory_girl_rails", '>= 4.2.0'
