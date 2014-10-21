@@ -1,4 +1,4 @@
-CraftedCrowd::Application.routes.draw do
+MultigroupEvents::Application.routes.draw do
 
   resources :password_resets
   resources :profiles 

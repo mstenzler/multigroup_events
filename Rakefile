@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-CraftedCrowd::Application.load_tasks
+MultigroupEvents::Application.load_tasks
