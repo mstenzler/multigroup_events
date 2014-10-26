@@ -20,13 +20,13 @@ module ApplicationHelper
 	#return class name for flash message based on type
   def bootstrap_class_for flash_type
     case flash_type
-      when :success
+      when "success"
         "alert-success" # Green
-      when :error
+      when "error"
         "alert-danger" # Red
-      when :alert
+      when "alert"
         "alert-warning" # Yellow
-      when :notice
+      when "notice"
         "alert-info" # Blue
       else
         flash_type.to_s
