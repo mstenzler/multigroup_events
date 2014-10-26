@@ -34,11 +34,7 @@ default_time_zone: "Eastern Time (US & Canada)"
 default_remember_me: false
 development:
   host: "localhost:3000"
-  meetup_key: "jvplc47uffne3p4oc9dc463pbb"
-  meetup_secret: "fvm7ojb79ieiediv03eoajsc6t"
 test:
   host: "test.local"
-  meetup_key: "jvplc47uffne3p4oc9dc463pbb"
-  meetup_secret: "fvm7ojb79ieiediv03eoajsc6t"
 production:
   host: "www.ApplicationTemplate.com"
