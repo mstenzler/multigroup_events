@@ -9,30 +9,35 @@ class UsersController < ApplicationController
   end
 
 	def show
+    puts 'IN SHOW!!!'
+    logger.debug("IN user show")
     @user = User.find(params[:id])
+    logger.debug("Got user = #{@user.inspect}")
   end
 
   def new
-  	@user = User.new
+  	@user = new_user
+    logger.debug("user.name = #{@user.name}")
 #    @countries = GeoCountry.get_country_list({default_country: CONFIG[:default_country],
 #                                              force_reaload: true})
     load_new_user_info
   end
 
   def create
-    @user = User.new(user_params)  
+    @user = new_user(user_params)  
 #    p "IN CREATE: @user.gender = '#{@user.gender}', @user.birthdate = '#{@user.birthdate}'"
     @user.set_create_ip_addresses(request.remote_ip)
     if @user.save
       profile = @user.build_profile
       profile.save
     	sign_in @user
+      session[:omniauth] = nil
       if CONFIG[:verify_email?]
         @user.send_email_validation_token
         redirect_to new_user_verify_email_path(@user)
 #        render 'show_verify_email'
       else
-    	  flash[:success] = "Welcome to the Sample App!"
+    	  flash[:success] = "Welcome. You have registered for the site!"
         redirect_to @user
       end
     else
@@ -101,8 +106,10 @@ class UsersController < ApplicationController
     end
 
     def load_new_user_info
-      @countries = GeoCountry.get_country_list({default_country: CONFIG[:default_country],
+      if CONFIG[:enable_country?]
+        @countries = GeoCountry.get_country_list({default_country: CONFIG[:default_country],
                                               force_reaload: true})
+      end
     end
 
     # Before filters
@@ -125,5 +132,19 @@ class UsersController < ApplicationController
 
     def is_signed_in
     	redirect_to(root_url) if signed_in?
+    end
+
+    def new_user(user_params = {})
+      user = User.new(user_params)
+      omni = session[:omniauth]
+      logger.debug("IN new_user!!!. session = #{omni}")
+      if omni
+        logger.debug("About to call user.apply_omniauth")
+        user.apply_omniauth(omni)
+        user.auth_type = User::AUTH_OMNIAUTH
+      else
+        user.auth_type = User::AUTH_LOCAL
+      end
+      user
     end
 end

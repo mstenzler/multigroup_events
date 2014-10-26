@@ -132,16 +132,21 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (1.25.1)
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     multi_json (1.8.4)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.3.14)
+    netrc (0.8.0)
+    nifty-generators (0.4.6)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oauth2 (1.0.0)
@@ -201,6 +206,9 @@ GEM
     ref (1.0.5)
     rename (1.0.2)
       rails (>= 3.0.0)
+    rest-client (1.7.2)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -298,13 +306,16 @@ DEPENDENCIES
   launchy
   libnotify (>= 0.8.0)
   mini_magick
+  mocha
   mysql2
+  nifty-generators
   omniauth-facebook
   omniauth-meetup
   populator
   rails (= 4.0.2)
   random_data
   rename
+  rest-client
   rspec-rails (>= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc

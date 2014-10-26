@@ -23,7 +23,9 @@ module SessionsHelper
     !current_user.nil?
   end
 
-  alias_method :logged_in?, :signed_in?
+  [:logged_in?, :user_logged_in?, :user_signed_in?].each do |ali|
+    alias_method ali, :signed_in?
+  end
 
   def current_user=(user)
     @current_user = user

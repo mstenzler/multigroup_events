@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   belongs_to :geo_country
   belongs_to :geo_area
   has_one :profile
-  has_one :personal_profile, -> { includes :personal_question_responses,
-                                           :personal_question_wants  }
+  has_many :authentications
+#  has_one :personal_profile, -> { includes :personal_question_responses,
+#                                           :personal_question_wants  }
 
 	before_save { email.downcase! }
 	before_create :create_remember_token
@@ -13,7 +14,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
   
-  attr_accessor :verify_token, :unhashed_email_validation_token, :zip_code
+  attr_accessor :verify_token, :unhashed_email_validation_token, 
+                :zip_code, :auth_type
 
   VALIDATION_CODE_RESET_MESSAGE = "Your email validation code has been reset and emailed to you."
 
@@ -31,6 +33,10 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   VALID_NAME_REGEX = /\A[a-z\d\-\_\.\&\s]+\z/i
   VALID_USERNAME_REGEX = /\A[a-z]{1}[a-z\d\-\_]+\z/i
+
+  AUTH_TYPES = ["local", "omniauth"]
+  AUTH_LOCAL = AUTH_TYPES[0]
+  AUTH_OMNIAUTH = AUTH_TYPES[1]
   
   AGE_DISPLAY_TYPES = ["Hidden", "Number", "Range"]
 
@@ -85,13 +91,36 @@ class User < ActiveRecord::Base
   gender_can_be_blank = CONFIG[:require_gender?] ? false : true
   birthdate_can_be_blank = CONFIG[:require_birthdate?] ? false : true
   time_zone_can_be_blank = CONFIG[:require_time_zone?] ? false : true
+  country_can_be_blank = CONFIG[:require_country?] ? false : true
+  zip_code_can_be_blank = CONFIG[:require_zip_code?] ? false : true
 
+  #For each of the user_form_options define require_#{option_name} and
+  #enable_#{option_name} methods and make each one a helper method as well
+  CONFIG[:user_form_options].each do |option_name|
+    enable_name = "enable_#{option_name}".to_sym
+    require_name = "require_#{option_name}".to_sym
+    use_name = "use_#{option_name}".to_sym
+    define_method enable_name do
+      CONFIG[enable_name]
+    end
+#    helper_method enable_name
+    define_method require_name do
+      CONFIG[require_name]
+    end
+#    helper_method require_name
+    define_method use_name do 
+      new_record? ? CONFIG[require_name] : CONFIG[enable_name]
+    end
+#    helper_method use_name
+  end
 #  p "IN VALIDATE: gender = '#{gender}', birthdate = '#{birthdate}'"
 #p "IN VALIDATE: name_can_be_blank = '#{name_can_be_blank}', CONFIG[:require_name?] = #{CONFIG[:require_name?]}'"
 
-  has_secure_password
+  has_secure_password validations: false
 
-  validates :password, presence: true, confirmation: true, length: { minimum: 6 }, on: :create
+  validates :password, presence: true, allow_blank: false, 
+  confirmation: true, length: { minimum: 6 }, on: :create, 
+  if: lambda { |u| u.password_required? }
 
   validates :name, allow_blank: name_can_be_blank, presence: !name_can_be_blank, 
             format: { with: VALID_NAME_REGEX },
@@ -101,8 +130,10 @@ class User < ActiveRecord::Base
 
  #   req_username = CONFIG[:require_username?] || false
  #   p "DEFINING USERNAME. username_can_be_blank = #{username_can_be_blank}"
-  validates :geo_country, presence: true
-  validates :zip_code, presence: true, on: :create
+  validates :geo_country, allow_blank: country_can_be_blank, presence: !country_can_be_blank,
+            if: "CONFIG[:enable_country?]"
+  validates :zip_code, allow_blank: zip_code_can_be_blank, presence: !zip_code_can_be_blank, 
+            on: :create, if: "CONFIG[:enable_zip_code?]"
   validates :username, allow_blank: username_can_be_blank, presence: !username_can_be_blank, 
             format: { with: VALID_USERNAME_REGEX },
             uniqueness: { case_sensitive: false},
@@ -129,6 +160,27 @@ class User < ActiveRecord::Base
       date_hash.merge!(on_or_after: Proc.new{ MAX_AGE.years.ago }, on_or_after_message: "Cannot be more than #{MAX_AGE} years old")
     end
     validates_date :birthdate,  date_hash
+  end
+
+  if CONFIG[:user_identity_field] == 'username'
+    def to_param
+      self.username
+    end
+
+    def self.find(identifier)
+      self.find_by_username(identifier)
+    end
+  end
+
+  def User.find_by_identity(ident, args)
+    field = CONFIG[:user_identity_field]
+    puts "args = #{args.inspect}"
+    puts "arg class = args.class.inspect"
+    ret = where(field => ident)
+    if args[:include]
+      ret = ret.includes(args[:include])
+    end
+    ret.first
   end
 
   def User.username_taken?(uname)
@@ -168,6 +220,19 @@ class User < ActiveRecord::Base
     ret
   end
 
+  def has_local_authentication?
+    !password_digest.blank?
+ #   password_digest ? true : false
+  end
+
+  def num_authentications
+    authentications.length
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?)
+  end
+
   def display_age_range
     self.class.display_age_range(age)
   end
@@ -191,17 +256,17 @@ class User < ActiveRecord::Base
     self.geo_area.display
   end
 
-  def to_param
-    self.username
-  end
+#  def to_param
+#    self.username || self.id
+#  end
 
   def zip_code
     @zip_code || geo_area.try(:zip_code)
   end
 
-  def self.find(identifier)
-    self.find_by_username(identifier)
-  end
+#  def self.find(identifier)
+#    self.find_by_username(identifier)
+#  end
 
   def init_unvalidated_email
     if CONFIG[:verify_email?]
@@ -238,11 +303,11 @@ class User < ActiveRecord::Base
     UserMailer.email_validation_token(self).deliver
   end
 
-  def send_password_reset
+  def send_password_reset(is_new = false)
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    UserMailer.password_reset(self, is_new).deliver
   end
 
   def set_create_ip_addresses(adr)
@@ -302,23 +367,6 @@ class User < ActiveRecord::Base
     end
   end
 
-=begin
-  def update_age(do_save=false)
-    new_age = calculate_age
-    Rails.logger.debug("IN update_age. new_age = #{new_age.inspect}")
-    self.age = new_age
-    self.age_last_checked = Time.zone.now
-    if do_save
-      self.save(:validate => false)
-    end
-    new_age
-  end
-
-  def update_age!
-    update_age(true)
-  end
-=end
-
   def personal_enabled?
     (self.profile && self.profile.enable_personal) ? true : false
   end
@@ -337,6 +385,31 @@ class User < ActiveRecord::Base
     self.profile.update_attribute(:enable_personal, false)
   end
 
+  def apply_omniauth(omniauth)
+    info = omniauth['info'] || {}
+    self.name = info['name'] if info['name'] && !self.name
+    self.email = info['email'] if info['email'] && !self.email
+    args = {
+      provider: omniauth['provider'], 
+      uid: omniauth['uid']
+    }
+    cred = omniauth['credentials']
+    unless cred
+      raise "Don't have credentials in omniauth hash"
+    end
+    args[:token] = cred['token'] if cred['token']
+    args[:token_secret] = cred['token_secret'] if cred['token_secret']
+    args[:refresh_token] = cred['refresh_token'] if cred['refresh_token']
+    args[:expires_at] = Time.at(cred['expires_at']) if cred['expires_at']
+    args[:expires] = (cred['expires'] =~ /false/i ? false : true) if cred['expires']
+    logger.debug("About to build authentications with args = #{args.inspect}")
+    authentications.build(args)
+  end
+
+#  def password_required?
+#    (authentications.empty? || !password_digest.blank?)
+#  end
+
   private
 
     def create_remember_token
@@ -350,7 +423,9 @@ class User < ActiveRecord::Base
     def init_new_user
       self.avatar_type ||= NO_AVATAR
       self.age_display_type ||= AGE_DISPLAY_NUMBER
-      proccess_geo_area unless self.geo_area
+      if CONFIG[:enable_country?] && CONFIG[:enable_zip_code?]
+        proccess_geo_area unless self.geo_area 
+      end
       if new_record?
         init_unvalidated_email
       end
@@ -358,7 +433,11 @@ class User < ActiveRecord::Base
 
     def proccess_geo_area
       unless (self.geo_country_id && self.zip_code)
-        raise "Error. Tring to proccess geo_area without a country_id & zip"
+        if CONFIG[:require_country?] || CONFIG[:require_zip_code?]
+          raise "Error. Tring to proccess geo_area without a country_id & zip"
+        else
+          return false
+        end
       end
       geo_area = GeoArea.get_or_create_geo_area(self.geo_country_id, self.zip_code)
 

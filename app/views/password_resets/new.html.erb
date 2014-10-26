@@ -1,11 +1,14 @@
 <% provide(:title, 'Reset Password') %>
-<h1>Reset Password</h1>
+<% set_name = @is_new ? "Set" : "Reset" %>
+<h1> <%= set_name %> Password</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
+  	<div class="info_box">Enter the email address you registered with to have an email sent with a link that will allow you to <%= set_name.downcase %> your password 
+  	</div>
 		<%= bootstrap_form_tag url: password_resets_path, :method => :post do |f| %>
 		  <%= f.email_field :email %>
-		  <%= f.submit "Reset Password", class: "btn btn-lg btn-primary" %>
+		  <%= f.submit "Send", class: "btn btn-lg btn-primary" %>
 		<% end %>
 	</div>
 </div>

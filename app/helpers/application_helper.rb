@@ -14,7 +14,7 @@ module ApplicationHelper
 
   #returns the Display Name of the application
   def app_display_name
-    CONFIG[:display_name] || "Ruby on Rails Template" 
+    CONFIG[:display_name] || "Multigroup Events" 
   end
 
 	#return class name for flash message based on type

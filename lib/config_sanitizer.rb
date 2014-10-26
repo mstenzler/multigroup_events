@@ -9,7 +9,14 @@ module ConfigSanitizer
 			raise ConfigError, "CONFIG[:enable_birthdate] must be true to use min_age or max_age"
 		end
 
-		['name?', 'username?', 'gender?', 'birthdate?'].each do |attribute|
+		uif = config[:user_identity_field]
+
+		if uif && !(['id', 'username'].include?(uif))
+			raise ConfigError, "CONFIG[:user_identity_field] must be either id or username"
+		end 
+
+ 
+		['name?', 'username?', 'gender?', 'birthdate?', 'country?', 'zip_code?'].each do |attribute|
 			check_require_enabled(config, attribute)
 		end
 

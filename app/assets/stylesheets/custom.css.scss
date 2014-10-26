@@ -31,6 +31,12 @@ textarea {
   resize: vertical;
 }
 
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .center {
   text-align: center;
   h1 {
@@ -69,6 +75,22 @@ p {
   line-height: 1.7em;
 }
 
+.signin_drop_min_width {
+  min-width: 120px;
+}
+.pad_width {
+  padding: 0 15px 0 15px;
+}
+
+.info_box {
+  padding: 15px;
+  background-color: $brand-info;
+  border: 1px solid $gray-lighter;
+  margin: 0 0 10px 0;
+  border-radius: 10px;
+#  font-size: 1.2em;
+  font-weight: bold;  
+}
 
 /* header */
 
@@ -261,3 +283,84 @@ div.answer-display-block {
   padding-top:    1em;
 }
 
+/* authentication */
+
+.auth_link_holder {
+  float:left;
+  margin: 0 10px;
+  p {
+    text-align: center;
+  }
+}
+
+.authentication_label {
+  display: inline-block;
+  background-color: #EEE;
+  border: solid 1px #999;
+  border-radius: 6px;
+  padding: 5px 10px;
+#  position: relative;
+   img {
+     float: left;
+     margin: 5px;
+     display: block;
+     vertical-align: middle;
+   }
+  .provider {
+    float: left;
+    margin: 5px 10px 5px 5px;
+  }
+  .dismiss {
+    display: inline-block;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+ #   position: absolute;
+ #   top: 3px;
+ #   right: 3px;
+ #   color: #333;
+ #   padding: 2px 4px;
+    font-size: 12px;
+  }
+}
+
+.authentication {
+  float: left;
+  background-color: #EEE;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  position: relative;
+  margin-right: 10px;
+}
+
+.authentication .remove {
+  text-decoration: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: #333;
+  padding: 2px 4px;
+  font-size: 10px;
+}
+
+.authentication .remove:hover {
+  color: #FFF;
+  background-color: #777;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+}
+
+.authentication img {
+  float: left;
+}
+
+.authentication .provider, .authentication .uid {
+  margin-left: 38px;
+  margin-right: 20px;
+}
+
+.authentication .provider {
+  font-weight: bold;
+}

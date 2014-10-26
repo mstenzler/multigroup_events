@@ -1,5 +1,8 @@
 MultigroupEvents::Application.routes.draw do
 
+  match '/auth/:provider/callback', to: 'authentications#create', via: 'get'
+
+  resources :authentications
   resources :password_resets
   resources :profiles 
 #  resources :personal_profiles, except: [:show]

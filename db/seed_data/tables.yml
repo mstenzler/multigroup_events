@@ -1,28 +1,4 @@
 ---
-personal_question_answers:
-  enabled: true
-  data_file_type: csv
-  delimiter: \|
-  fields:
-    - id
-    - personal_question_id
-    - answer
-    - rank
-  reset_auto_increment: true
-  terminated_by: "\n"
-  update_time: true
-personal_questions:
-  enabled: true
-  data_file_type: csv
-  delimiter: \|
-  fields:
-    - id
-    - rank
-    - label
-    - question
-  reset_auto_increment: true
-  terminated_by: "\n"
-  update_time: true
 geo_areas:
   enabled: true
   data_file_type: csv

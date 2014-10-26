@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
 	    	raise ArgumentError.new("No :username specified")
 	    end
 	    logger.debug("!!###  username = '#{username}'")
-	    @user = User.find_by_username(username, include: :profile)
+      @user = User.find_by_identity(username, include: :profile)
 	    if @user
 	    	if logged_in? && (current_user.id == @user.id)
 	        	@show_edit_links = true

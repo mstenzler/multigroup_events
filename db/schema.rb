@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617211738) do
+ActiveRecord::Schema.define(version: 20141022000951) do
+
+  create_table "authentications", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.string   "token_secret"
+    t.string   "refresh_token"
+    t.datetime "expires_at"
+    t.boolean  "expires",       default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "geo_areas", force: true do |t|
     t.integer  "geo_country_id"
@@ -91,62 +104,6 @@ ActiveRecord::Schema.define(version: 20140617211738) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "personal_profiles", force: true do |t|
-    t.integer  "user_id"
-    t.text     "about"
-    t.text     "looking_for"
-    t.string   "privacy_type",        limit: 32
-    t.string   "age_display_type",    limit: 32
-    t.integer  "height_inches",                  default: 0
-    t.string   "height_display_type", limit: 32
-    t.integer  "min_height_inches"
-    t.integer  "max_height_inches"
-    t.integer  "wanted_genders_mask"
-    t.integer  "min_age"
-    t.integer  "max_age"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "personal_profiles", ["height_inches"], name: "personal_profile_height_opt", using: :btree
-  add_index "personal_profiles", ["user_id"], name: "personal_profile_opt", using: :btree
-
-  create_table "personal_question_answers", force: true do |t|
-    t.integer  "personal_question_id"
-    t.string   "answer"
-    t.integer  "rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "personal_question_responses", force: true do |t|
-    t.integer  "personal_profile_id"
-    t.integer  "personal_question_answer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "personal_question_responses", ["personal_profile_id"], name: "prsnl_question_responses_opt", using: :btree
-
-  create_table "personal_question_wants", force: true do |t|
-    t.integer  "personal_profile_id"
-    t.integer  "personal_question_answer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "personal_question_wants", ["personal_profile_id"], name: "prsnl_question_wants_opt", using: :btree
-
-  create_table "personal_questions", force: true do |t|
-    t.string   "question"
-    t.string   "label",      limit: 32
-    t.integer  "rank"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "personal_questions", ["label"], name: "personal_question_label_opt", using: :btree
 
   create_table "profiles", force: true do |t|
     t.integer  "user_id"

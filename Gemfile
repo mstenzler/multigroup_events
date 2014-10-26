@@ -37,6 +37,7 @@ group :doc do
 end
 
 group :development do
+  gem 'nifty-generators'
   gem 'populator'
   gem 'faker'
   gem 'rename'
@@ -84,6 +85,7 @@ gem 'omniauth-meetup'
 gem 'omniauth-facebook'
 #gem 'twitter'
 gem 'fb_graph'
+gem 'rest-client'
 
 group :development, :test do
   gem 'rspec-rails', '>= 2.13.1'
@@ -99,3 +101,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem "mocha", group: :test

@@ -19,12 +19,13 @@
         </ul>
         <ul class="nav navbar-nav pull-right">
           <% if signed_in? %>
-            <li class="dropdown">
+            <li class="dropdown signin_drop_min_width">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.username %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", show_profile_path(current_user) %></li>
                 <li><%= link_to "Edit User", edit_user_path(current_user) %></li>
                 <li><%= link_to "Edit Profile", edit_profile_path(current_user) %></li>
+                <li><%= link_to "3rd party aps", authentications_path %></li>
                 <% if current_user.personal_enabled? %>
                   <li><%= link_to "Personal Profile", show_personal_path(current_user) %></li>
                   <li><%= link_to "Edit ersonal Profile", edit_personal_profile_path %></li>

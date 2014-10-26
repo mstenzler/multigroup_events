@@ -1,0 +1,68 @@
+<% provide(:title, "Authentications") %>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% if @authentications %>
+      <% unless @authentications.empty? %>
+        <p><strong>You have signed in with these services:</strong></p>
+        <div class="authentications">
+          <% is_last_auth = @authentications[0].is_last_auth? %>
+          <% for authentication in @authentications %>
+            <div class="authentication_label">
+              <%= image_tag "#{authentication.provider}_32.png", :size => "32x32" %>
+              <div class="provider">
+                <%= authentication.provider_name %>
+                <p class="uid"><%= authentication.uid %></p>
+              </div>
+              <div class="dismiss">
+                <% if is_last_auth %>
+                  <a href="#" data-toggle="tooltip" data-placement="left" title="This is your only authentication source so cannot be removed unless you set a local password for your account">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                  </a>
+                <% else %>
+                  <%= link_to authentication_path(authentication), :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove" do %>
+                     <span class="glyphicon glyphicon-remove"></span>
+                  <% end %>
+                <% end %>
+              </div> <!-- dismiss -->
+            </div>  <!-- authentication_label -->
+          <% end %> <!-- authentication loop -->
+          <div class="clear"></div>
+        </div> <!-- authentications -->
+      <% end %> <!-- unless empty -->
+      <p><strong>Add another service to sign in with:</strong></p>
+    <% else %>
+      <p><strong>Sign in through one of these services:</strong></p>
+    <% end %>
+
+  </div>
+</div>
+  
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% CONFIG[:omniauth_providers].each do |provider| %>
+      <div class="auth_link_holder">
+        <a href="/auth/<%= provider %>" class="auth_provider">
+          <%= image_tag "#{provider}_64.png", size: "64x64", class: "center", alt: "#{provider.titleize}" %><p><%= provider.titleize %></p>
+        </a>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <% unless user_signed_in? %>
+      <hr/>
+      <p>
+        <strong>Don't use these services?</strong>
+        <%= link_to "Sign up",  new_user_path%> or
+        <%= link_to "sign in",  signin_path %> with a password.
+      </p>
+    <% end %>
+
+  </div>
+</div>

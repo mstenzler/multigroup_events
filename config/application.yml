@@ -1,20 +1,26 @@
-title: Crafted Crowd
-display_name: Crafted Crowd
-min_age: 18
-max_age: 140
-user_form_options: ['name?', 'username?', 'gender?', 'birthdate?', 'time_zone?']
+title: Multigroup Events
+display_name: Multigroup Events
+min_age: 
+max_age: 
+omniauth_providers: ['meetup', 'twitter', 'facebook', 'google_apps']
+user_form_options: ['name?', 'username?', 'gender?', 'birthdate?', 'time_zone?', 'country?', 'zip_code?']
 enable_name?: true
 require_name?: true
 enable_username?: true
 require_username?: true
-enable_gender?: true
-require_gender?: true
-enable_birthdate?: true
-require_birthdate?: true
-enable_time_zone?: true
-require_time_zone?: true
+enable_gender?: false
+require_gender?: false
+enable_birthdate?: false
+require_birthdate?: false
+enable_time_zone?: false
+require_time_zone?: false
+enable_country?: false
+require_country?: false
+enable_zip_code?: false
+require_zip_code?: false
 verify_email?: true
-user_name_field: email_or_username
+user_name_field: email
+user_identity_field: id
 check_remember_me?: true
 use_avatar_gender_default?: true
 password_reset_ttl_hours: 4
@@ -24,9 +30,15 @@ medium_avatar_size: [100, 100]
 small_avatar_size: [60, 60]
 tiny__avatar_size: [30, 30]
 default_country: US
+default_time_zone: "Eastern Time (US & Canada)"
+default_remember_me: false
 development:
   host: "localhost:3000"
+  meetup_key: "jvplc47uffne3p4oc9dc463pbb"
+  meetup_secret: "fvm7ojb79ieiediv03eoajsc6t"
 test:
   host: "test.local"
+  meetup_key: "jvplc47uffne3p4oc9dc463pbb"
+  meetup_secret: "fvm7ojb79ieiediv03eoajsc6t"
 production:
   host: "www.ApplicationTemplate.com"

@@ -17,4 +17,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     mail :to => user.email, :subject => "Password Reset"
   end
+
+  def password_set(user)
+    @user = user
+    mail :to => user.email, :subject => "Set Password"
+  end
 end
