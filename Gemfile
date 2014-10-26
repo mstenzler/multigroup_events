@@ -3,7 +3,7 @@ ruby '2.0.0'
 #ruby-gemset=multigroup_events
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem 'rails', '4.1.6'
 
 
 # Use sqlite3 as the database for Active Record
@@ -75,7 +75,8 @@ gem 'bootstrap-will_paginate'
 gem 'validates_timeliness', github: 'adzap/validates_timeliness', branch: 'rails4'
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.1.2'
+#gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt'
 #gem 'devise'
 gem 'carrierwave'
 gem 'mini_magick'

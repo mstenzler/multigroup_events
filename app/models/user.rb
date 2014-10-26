@@ -147,7 +147,7 @@ class User < ActiveRecord::Base
              inclusion: { in: VALID_GENDERS },
             if: "CONFIG[:enable_gender?]"
   validates :time_zone, allow_blank: time_zone_can_be_blank, presence: !time_zone_can_be_blank, 
-             inclusion: { in: ActiveSupport::TimeZone.zones_map(&:name) },
+             inclusion: { in: [ActiveSupport::TimeZone.zones_map(&:name)] },
             if: "CONFIG[:enable_time_zone?]"
 
   if CONFIG[:enable_birthdate?]
