@@ -8,11 +8,13 @@ class AuthenticationsController < ApplicationController
     omniauth = request.env["omniauth.auth"]
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
+      authentication.update_credentials(omniauth)
       flash[:notice] = "Signed in successfully"
       sign_in(authentication.user, CONFIG[:default_remember_me] || false)
       redirect_to authentication.user
     elsif current_user
-      current_user.authentications.create(provider: omniauth['provider'], uid: omniauth['uid'])
+      authentication = current_user.authentications.create(provider: omniauth['provider'], uid: omniauth['uid'])
+      authentication.update_credentials(omniauth)
       flash[:notice] = "Authentication Succesfull"
       redirect_to authentications_url
     else
